@@ -1,0 +1,29 @@
+/**
+Given a non-empty string s and a dictionary wordDict containing a list of non-empty words, 
+determine if s can be segmented into a space-separated sequence of one or more dictionary words.
+Note:
+The same word in the dictionary may be reused multiple times in the segmentation.
+You may assume the dictionary does not contain duplicate words.
+**/
+
+// Backtracking
+// Time: O(n^2)
+// Space: O(n)
+public boolean wordBreak(String s, List<String> wordDict) {
+	return backtracking(s, 0, new boolean[s.length()], wordDict);
+}
+
+private boolean backtracking(String s, int index, boolean[] unbreakable, List<String> wordDict) {
+	if (index == s.length()) return true;
+	if (unbreakable[index]) return false;
+	for (String word : wordDict) {
+		if (!s.startsWith(word, index)) {
+			continue;
+		}
+		if (backtracking(s, index + word.length(), unbreakable, wordDict)) {
+			return true;
+		}
+	}
+	unbreakable[index] = true;
+	return false;
+}
