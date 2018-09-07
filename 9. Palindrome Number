@@ -1,0 +1,17 @@
+/**
+Determine whether an integer is a palindrome. An integer is a palindrome when it reads the same backward as forward.
+**/
+public boolean isPalindrome(int x) {
+    // Deal with cases like, -121 or 120, which can't be a palindrome
+    if (x < 0 || (x != 0 && x % 10 == 0)) {
+        return false;
+    }
+    // Get number by divide 10 and mod 10
+    int res = 0;
+    while (res < x) {
+        res = res * 10 + x % 10;
+        x = x / 10;
+    }
+    // Depend on odd or even numbers of digits
+    return (res == x || res / 10 == x);
+}
